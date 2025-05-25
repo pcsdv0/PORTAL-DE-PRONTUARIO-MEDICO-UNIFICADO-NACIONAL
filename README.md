@@ -1,104 +1,102 @@
 # 🏥 Portal de Prontuário Médico Unificado Nacional
 
-## 🚩 Descrição do Projeto
+## 📌 Descrição do Projeto
 
-O **Portal de Prontuário Médico Unificado Nacional** foi idealizado para resolver um dos maiores desafios do setor de saúde: a fragmentação e a inacessibilidade de informações médicas de pacientes entre diferentes instituições e profissionais. 
+O **Portal de Prontuário Médico Unificado Nacional** foi desenvolvido com o objetivo de solucionar um dos maiores desafios da saúde pública e privada no Brasil: a fragmentação dos dados clínicos dos pacientes. Esta plataforma web permite que diferentes instituições de saúde acessem e compartilhem informações de forma segura, centralizada e eficiente.
 
+### 🧭 Finalidade
 
-### Para que Serve
-
-- **Interoperabilidade**: concentra dados clínicos, administrativas e de histórico de pacientes em uma única plataforma, permitindo que hospitais, clínicas e laboratórios compartilhem e consultem informações em tempo real, sem retrabalho ou duplicação de registros.  
-
-- **Continuidade do Cuidado**: médicos de diferentes especialidades e localidades conseguem acompanhar toda a trajetória clínica do paciente — exames, diagnósticos, prescrições e internações — com um único login.  
-
-- **Segurança e Conformidade**: utiliza autenticação JWT, cookies `httpOnly` e boas práticas de backup (mysqldump via cron), garantindo a privacidade dos dados e a conformidade com normas de segurança e LGPD.  
-
-- **Eficiência Operacional**: reduz o tempo de cadastro e localização de informações, minimiza erros de transcrição e agiliza processos como triagem, consulta de exames e emissão de relatórios.  
-
-- **Acessibilidade**: interface web leve baseada em Handlebars, que funciona em qualquer navegador moderno e requer apenas conexão HTTP(S) na porta 3000.  
+- **Interoperabilidade**: Integra registros médicos entre hospitais, clínicas e laboratórios, eliminando redundância e facilitando o compartilhamento de dados em tempo real.
+- **Continuidade do Cuidado**: Médicos de diferentes especialidades e regiões podem visualizar o histórico completo do paciente — incluindo exames, diagnósticos e prescrições — com um único login.
+- **Segurança e Conformidade**: Implementa autenticação JWT, cookies `httpOnly`, backups automáticos com `mysqldump` via `cron`, e atende à LGPD.
+- **Eficiência Operacional**: Reduz o tempo de cadastro, evita erros de transcrição e agiliza a triagem e os atendimentos.
+- **Acessibilidade**: Interface leve e compatível com qualquer navegador moderno, funcionando sobre HTTP(S) na porta 3000.
 
 
-## 🚀 Tecnologias
+## 🚀 Tecnologias Utilizadas
 
 - **Linguagem**: JavaScript (ES6+)
-- **Backend**: Node.js (v14+) + Express.js  
-- **Banco de Dados**: MySQL  
-- **Template Engine**: Handlebars (`express-handlebars`)  
-- **Autenticação**: JSON Web Tokens (JWT)  
-- **Gerenciamento de Ambiente**: `dotenv`  
-- **Process Manager**: PM2 / nodemon / systemd  
-- **Versionamento**: Git / GitHub  
-- **SO alvo**: Ubuntu Server 20.04 LTS ou superior
+- **Backend**: Node.js (v14+) com Express.js
+- **Banco de Dados**: MySQL
+- **Template Engine**: Handlebars (`express-handlebars`)
+- **Autenticação**: JSON Web Tokens (JWT)
+- **Gerenciamento de Ambiente**: `dotenv`
+- **Gerenciador de Processos**: PM2, nodemon ou systemd
+- **Versionamento de Código**: Git e GitHub
+- **Sistema Operacional Alvo**: Ubuntu Server 20.04 LTS ou superior
 
 
-## 📄 Visão Geral
+## 📄 Funcionalidades
 
-Este portal unificado atende aos requisitos de:
-
-1. **Cadastro, login e logout** de usuários (com roles).  
-2. **CRUD** em duas entidades principais: Pacientes e Prontuários.  
-3. **API RESTful** para integração externa (JSON).  
-4. **Painel administrativo** protegido por middleware de autenticação.  
-5. **Interface web** leve com Handlebars e assets estáticos.
+- Autenticação de usuários com controle de acesso por perfil.
+- Operações de **CRUD** completas para Pacientes e Prontuários.
+- API RESTful para consumo externo de dados (JSON).
+- Painel administrativo protegido por middleware.
+- Interface web utilizando Handlebars e arquivos estáticos.
 
 
 ## 📁 Estrutura do Projeto
 
 
-/Portal de Prontuário Médico Unificado Nacional
+📦 Portal de Prontuário Médico Unificado Nacional
 ├── backend/
-│   ├── controllers/      
-│   ├── middlewares/     
-│   ├── models/           
-│   ├── routes/           
-|   |── .env
-|   |── package.json
-|   |── package-locjk.json
-│   └── server.js         
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── models/
+│   ├── routes/
+│   ├── .env
+│   ├── package.json
+│   ├── package-lock.json
+│   └── server.js
 │
 ├── frontend/
-│   ├── public/          
-│   └── views/            
-│       └── layouts/     
+│   ├── public/
+│   └── views/
+│       └── layouts/
 │
 ├── database/
-│   └── portal_prontuario.sql       
-│             
-└── README.md            
+│   └── portal\ prontuario.sql
+│
+├── .gitignore
+└── README.md
+
 
 
 ## 🖥️ Requisitos de Infraestrutura
 
-- **Distribuição**: Ubuntu Server 20.04 LTS ou superior  
-- **RAM**: ≥ 2 GB  
-- **Armazenamento**: ≥ 10 GB livres  
-- **Usuário**: root ou sudo habilitado  
-- **Rede**: SSH ativo  
+- **Sistema Operacional**: Ubuntu Server 20.04 LTS ou superior
+- **Memória RAM**: Mínimo de 2 GB
+- **Armazenamento**: Mínimo de 10 GB livres
+- **Usuário**: root ou com privilégios sudo
+- **Rede**: Acesso SSH habilitado
 
-### Configurações Obrigatórias
+### ⚙️ Configurações Necessárias
 
-- Node.js escutando na porta **3000**  
-- MySQL Server instalado e configurado  
-- Variáveis de ambiente via **dotenv**  
-- Process Manager (PM2, systemd ou nodemon)  
-- Backup automático com **mysqldump** via **cron**
-
-
-## ⚙️ Instalação e Setup
-
-1. **Atualize o sistema e instale dependências**  
-   
-   sudo apt update && sudo apt install -y nodejs npm mysql-server git
-
-2. **Clone e entre na pasta**
-
-  git clone url-do-repositorio
-  cd projeto
-  
-3. **Instale dependências Node e rode**
-
-  npm install
-  npm start
+- Node.js escutando na porta **3000**
+- MySQL Server instalado e ativo
+- Variáveis de ambiente definidas via `.env`
+- Gerenciador de processos: PM2, systemd ou nodemon
+- Backup automático configurado via `cron` com `mysqldump`
 
 
+## 📦 Instalação e Setup
+
+# 1. Atualize o sistema e instale dependências
+sudo apt update && sudo apt install -y nodejs npm mysql-server git
+
+# 2. Clone o repositório e entre na pasta
+git clone https://github.com/pcsdv0/PORTAL-DE-PRONTUARIO-MEDICO-UNIFICADO-NACIONAL.git
+cd PORTAL-DE-PRONTUARIO-MEDICO-UNIFICADO-NACIONAL/backend
+
+# 3. Instale as dependências do Node.js
+npm install
+
+# 4. Inicie o servidor
+npm start
+
+
+## 🙋‍♂️ Equipe e Contribuições
+
+Projeto desenvolvido por estudantes do 3º Período de Sistemas de Informação — Noite
+Contribuições e sugestões são bem-vindas! 💡
 
