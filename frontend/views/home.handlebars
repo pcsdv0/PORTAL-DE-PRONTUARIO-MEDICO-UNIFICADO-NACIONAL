@@ -1,0 +1,47 @@
+<br>
+<div class="container mt-5">
+  <img src="/css/imagens/logo.png" class="img-fluid w-50 d-block mx-auto" alt="Logo">
+</div>
+
+<br>
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button fw-bold btn btn-light" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Insira Nome, Senha e Função
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <form method="POST" action="/api/login">
+          <div class="form-group mb-3">
+            <label for="loginUsuario">Nome de Usuário</label>
+            <input type="text" class="form-control" id="loginUsuario" name="login" placeholder="Digite seu nome de usuário" required>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="senhaUsuario">Senha</label>
+            <input type="password" class="form-control" id="senhaUsuario" name="senha" placeholder="Digite sua senha" required>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="funcaoUsuario">Função</label>
+            <select class="form-control" id="funcaoUsuario" name="funcao" required>
+              <option value="" disabled selected>Selecione sua função</option>
+              <option value="médico">Médico</option>
+              <option value="enfermeiro">Enfermeiro</option>
+              <option value="atendente">Atendente</option>
+              <option value="administrador">Administrador</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-2">Entrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br><br><br><br><br>

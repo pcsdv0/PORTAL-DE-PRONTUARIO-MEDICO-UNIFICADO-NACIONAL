@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/prontuarios">Sistema de Pacientes</a>
+    <div class="d-flex">
+      <button id="btnLogout" class="btn btn-outline-light">Sair</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Cadastrar Novo Paciente</h2>
+
+  <form action="/pacientes" method="POST">
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome:</label>
+      <input type="text" class="form-control" id="nome" name="nome" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
+      <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="telefone" class="form-label">Telefone:</label>
+      <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="cpf" class="form-label">CPF:</label>
+      <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+    </div>
+
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a href="/pacientes" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+
+<script>
+  document.getElementById('btnLogout').addEventListener('click', function () {
+    // Remove token fake se estiver usando (ou outra info)
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+
+    // Redireciona para a página inicial de login
+    window.location.href = '/';
+  });
+</script>
+

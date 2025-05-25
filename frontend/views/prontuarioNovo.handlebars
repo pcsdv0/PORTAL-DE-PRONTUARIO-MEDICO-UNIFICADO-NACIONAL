@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Novo Prontuário</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/prontuarios">Sistema de Prontuários</a>
+    <div class="d-flex">
+      <button id="btnLogout" class="btn btn-outline-light">Sair</button>
+    </div>
+  </div>
+</nav>
+
+  <div class="container mt-5">
+    <h2 class="mb-4 fw-bold text-light">Novo Prontuário</h2>
+
+    <form action="/prontuarios" method="POST">
+      
+      <!-- Seleção do paciente -->
+      <div class="mb-3">
+        <label for="paciente_id" class="form-label fw-bold text-light">Nome do Paciente</label>
+        <select class="form-select" id="paciente_id" name="paciente_id" required>
+          <option value="" disabled selected>Selecione o paciente</option>
+          {{#each pacientes}}
+            <option value="{{this.id}}">{{this.nome}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <!-- Data do prontuário -->
+      <div class="mb-3">
+        <label for="data" class="form-label fw-bold text-light">Data</label>
+        <input type="date" class="form-control" id="data" name="data" required />
+      </div>
+
+      <!-- Descrição -->
+      <div class="mb-3">
+        <label for="descricao" class="form-label fw-bold text-light">Descrição</label>
+        <textarea class="form-control" id="descricao" name="descricao" rows="4" required></textarea>
+      </div>
+
+      <!-- Botões -->
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="/prontuarios" class="btn btn-secondary ms-2">Cancelar</a>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+  document.getElementById('btnLogout').addEventListener('click', function () {
+    // Remove token fake se estiver usando (ou outra info)
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+
+    // Redireciona para a página inicial de login
+    window.location.href = '/';
+  });
+</script>
+
+</body>
+
+</html>

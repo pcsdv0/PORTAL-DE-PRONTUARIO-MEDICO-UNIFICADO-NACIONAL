@@ -1,0 +1,26 @@
+{{!-- views/login.handlebars --}}
+{{!-- Usa o layout padrão --}}
+
+
+
+<br>
+<div class="container mt-5">
+  <img src="/css/imagens/logo.png" class="img-fluid w-50 d-block mx-auto" alt="Logo">
+</div>
+
+<br>
+<div class="container mt-5">
+  <h2 class="text-center mb-4 text-light">Bem-vindo, {{usuario.nome_usuario}}!</h2>
+
+  <div class="d-flex justify-content-center gap-4 mb-4">
+    <a href="/pacientes" class="btn btn-success btn-lg fw-bold">Gerenciar Pacientes</a>
+    <a href="/prontuarios" class="btn btn-info btn-lg fw-bold">Gerenciar Prontuários</a>
+  </div>
+
+  <div class="text-center">
+    <form action="/logout" method="POST">
+      <button type="submit" class="btn btn-danger">Sair</button>
+    </form>
+  </div>
+</div>
+

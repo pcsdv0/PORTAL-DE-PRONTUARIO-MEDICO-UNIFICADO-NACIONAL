@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Pacientes Cadastrados</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #343a40;
+    }
+    .mensagem-sucesso {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #198754;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/prontuarios">Sistema de Pacientes</a>
+      <div class="d-flex">
+        <button id="btnLogout" class="btn btn-outline-light">Sair</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="mb-4 fw-bold text-light">Pacientes Cadastrados</h2>
+
+    <a href="/pacientes/novo" class="btn btn-success mb-3">+ Novo Paciente</a>
+
+    {{#if pacientes.length}}
+    <table class="table table-bordered bg-white">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Data de Nascimento</th>
+          <th>Telefone</th>
+          <th>CPF</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each pacientes}}
+        <tr id="paciente-{{this.id}}">
+          <td>{{this.id}}</td>
+          <td>{{this.nome}}</td>
+          <td>{{this.data_nascimento}}</td>
+          <td>{{this.telefone}}</td>
+          <td>{{this.cpf}}</td>
+          <td>
+            <a href="/pacientes/editar/{{this.id}}" class="btn btn-warning btn-sm">Editar</a>
+            <form class="form-excluir" data-id="{{this.id}}" action="/pacientes/excluir/{{this.id}}" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{else}}
+      <div class="alert alert-info">Nenhum paciente encontrado.</div>
+    {{/if}}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.getElementById('btnLogout').addEventListener('click', function () {
+      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
+      window.location.href = '/';
+    });
+
+    // Exclusão dinâmica dos pacientes
+    document.querySelectorAll('.form-excluir').forEach(form => {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!confirm('Deseja realmente excluir este paciente?')) return;
+
+        const id = this.dataset.id;
+        const formData = new FormData(this);
+
+        try {
+          const response = await fetch(this.action, {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            document.getElementById(`paciente-${id}`).remove();
+            mostrarMensagem("Paciente excluído com sucesso!");
+          } else {
+            alert('Erro ao excluir paciente.');
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Erro na requisição.');
+        }
+      });
+    });
+
+    function mostrarMensagem(texto) {
+      const div = document.createElement("div");
+      div.className = "mensagem-sucesso";
+      div.innerText = texto;
+      document.body.appendChild(div);
+      setTimeout(() => div.remove(), 3000);
+    }
+  </script>
+
+  <a href="/login" class="btn btn-light text-dark mt-4 ms-4">
+    ← Voltar para o Início
+  </a>
+</body>
+</html>

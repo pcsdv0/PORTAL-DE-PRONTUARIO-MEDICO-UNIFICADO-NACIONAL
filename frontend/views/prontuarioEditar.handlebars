@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Prontuário</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4 fw-bold">Editar Prontuário</h2>
+
+    <form action="/prontuarios/editar/{{prontuario.id}}" method="POST">
+
+      <!-- Seleção do paciente -->
+      <div class="mb-3">
+        <label for="paciente_id" class="form-label">Nome do Paciente</label>
+        <select class="form-select" id="paciente_id" name="paciente_id" required>
+          <option value="" disabled>Selecione o paciente</option>
+          {{#each pacientes}}
+          <option value="{{this.id}}" {{#if (eq this.id ../prontuario.paciente_id)}}selected{{/if}}>
+            {{this.nome}}
+          </option>
+          {{/each}}
+        </select>
+      </div>
+
+      <!-- Data -->
+      <div class="mb-3">
+        <label for="data" class="form-label">Data</label>
+        <input type="date" class="form-control" id="data" name="data" value="{{prontuario.data}}" required />
+      </div>
+
+      <!-- Descrição -->
+      <div class="mb-3">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea class="form-control" id="descricao" name="descricao" rows="4" required>{{prontuario.descricao}}</textarea>
+      </div>
+
+      <!-- Botões -->
+      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+      <a href="/prontuarios" class="btn btn-secondary ms-2">Cancelar</a>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
